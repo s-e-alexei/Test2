@@ -11,10 +11,7 @@ namespace Test2
         {
             List<Double[]> st = new List<Double[]>();
             try
-            {
-                //@"C:\\Users\\USER\\source\\repos\\Ship\\Ship\\MarineRepository\\Compartments\\Data\\CargoHold1.csv"
-                //C:\Users\USER\source\repos\Test\Test\Data
-                //C:\Users\USER\source\repos\Test2\Test2\Data\Compartments
+            {             
                 foreach (string line in System.IO.File.ReadLines(@"C:\\Users\\USER\\source\\repos\\Test2\\Test2\\Data\\Compartments\\S1.csv"))
                     st.Add(line.Trim().Replace('.', ',').Split(';').Select(double.Parse).ToArray());
             }
@@ -36,9 +33,7 @@ namespace Test2
             
             List<Double[]> st1 = new List<Double[]>();
             try
-            {
-                //@"C:\\Users\\USER\\source\\repos\\Ship\\Ship\\MarineRepository\\Compartments\\Data\\CargoHold1.csv"
-                //C:\Users\USER\source\repos\Test\Test\Data
+            {                
                 foreach (string line in System.IO.File.ReadLines(@"C:\\Users\\USER\\source\\repos\\Test2\\Test2\\Data\\Trim\\Trim.csv"))
                     st.Add(line.Trim().Replace('.', ',').Split(';').Select(double.Parse).ToArray());
             }
@@ -59,7 +54,8 @@ namespace Test2
             }
             Console.WriteLine("Input SoundingI:");
 
-            double SoundingI = Convert.ToDouble(Console.ReadLine());
+           // double SoundingI = Convert.ToDouble(Console.ReadLine());
+           double SoundingI = 5;
             int pos1 = 0;
             //double Tt = 0;
             for (int i = 0; i < cargo.Count; i++)
@@ -72,12 +68,14 @@ namespace Test2
             }
             Console.WriteLine(pos1 + "   ");
             Console.WriteLine();
-           
-            double xi1 = Math.Abs((((cargo[pos1 + 1].Sounding - cargo[pos1].Sounding))/ (cargo[pos1 + 1].Sounding- cargo[pos1].Sounding)) * (SoundingI - cargo[pos1].Sounding) + cargo[pos1].Sounding);
+            // Тут необходимо произвести интерполяцию и найти все значение V1, V2 ... V9, исходя из значения SoundingI (например  SoundingI = 5)
+            // попытался найти Vi для столбца Volume1, массива cargo. Выводит ошибку.
+
+            double V1i = Math.Abs((((cargo[pos1 + 1].Volume1 - cargo[pos1].Volume1))/ (cargo[pos1 + 1].Sounding- cargo[pos1].Sounding)) * (SoundingI - cargo[pos1].Sounding) + cargo[pos1].Volume1);
             //double yi1 = Math.Abs((((compartment[pos1 + 1].Y - compartment[pos1].Y)) / (compartment[pos1 + 1].Volume - compartment[pos1].Volume)) * (vi1 - compartment[pos1].Volume) + compartment[pos1].Y);
             //double zi1 = Math.Abs((((compartment[pos1 + 1].Z - compartment[pos1].Z)) / (compartment[pos1 + 1].Volume - compartment[pos1].Volume)) * (vi1 - compartment[pos1].Volume) + compartment[pos1].Z);
 
-            Console.WriteLine("xi1: " + xi1);
+            Console.WriteLine("xi1: " + V1i);
             //Console.WriteLine("yi1: " + yi1);
             //Console.WriteLine("zi1; " + zi1);
             Console.WriteLine();
