@@ -13,96 +13,19 @@ namespace Test2
     class Program
     {
         static void Main(string[] args)
-        {
-            public List<string> GetAllFiles(string sDirt);
-            {
-                List<string> st = new List<string>();
-
-                //  List<Double[]> st = new List<Double[]>();
-                try
-                {
-                    foreach (string file in Directory.GetFiles(sDirt))
-                    {
-                        st.Add(file);
-                    }
-                    foreach (string fl in Directory.GetDirectories(sDirt))
-                    {
-                        st.AddRange(GetAllFiles(fl));
-                    }
-
-                    //for (string. i = 0; string. i < 12; string. i++)
-
-                    //foreach (string line in System.IO.File.ReadLines($@"C:\\Users\\USER\\source\\repos\\Test2\\Test2\\Data\\Compartments\\S1.csv"))
-                    //     st.Add(line.Trim().Replace('.', ',').Split(';').Select(double.Parse).ToArray());
-
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("NOT READ");
-                    Console.WriteLine(e.Message);
-                }
-                return st;
-
-                List<Cargo> cargo = new List<Cargo>();
-                foreach (Double[] item in st)
-                {
-                    cargo.Add(new Cargo(item));
-                    foreach (var subitem in item)
-                        Console.Write(subitem + " ");
-                    Console.WriteLine();
-                }
-            }
-            List<Double[]> st1 = new List<Double[]>();
-            try
-            {                
-                foreach (string line in System.IO.File.ReadLines(@"C:\\Users\\USER\\source\\repos\\Test2\\Test2\\Data\\Trim\\Trim.csv"))
-                    st1.Add(line.Trim().Replace('.', ',').Split(';').Select(double.Parse).ToArray());
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("NOT READ");
-                Console.WriteLine(e.Message);
-            }
-
-            Dif dif = new Dif(st1[0]);
-                foreach (var subitem in dif.T)
-                    Console.Write(subitem + " ");
-                    
-                Console.WriteLine();
-            Console.WriteLine("Input SoundingI:");
-            
-            double DifShip = -0.35;
-            int pos1 = 0;
-            //double Tt = 0;
-            for (int i = 0; i < dif.T.Length; i++)
-            {
-                if (dif.T[i]< DifShip)
-                {
-                    pos1 = i - 1; //x1 = xmin
-                    Console.WriteLine(pos1 + "   ");
-                    
-                    break;
-                }
-            }
-            
-            // double SoundingI = Convert.ToDouble(Console.ReadLine());
-            double SoundingI = 5;
-            int pos2 = 0;
-            //double Tt = 0;
-            for (int i = 0; i < cargo.Count; i++)
-            {
-                if (cargo[i].V[1] < SoundingI)
-                {
-                    pos2 = i - 1; //x1 = xmin
-                    break;
-                }
-            }
-            Console.WriteLine(pos2 + "   ");
-            Console.WriteLine();
+        {   
             // Тут необходимо произвести интерполяцию и найти все значение V1, V2 ... V9, исходя из значения SoundingI (например  SoundingI = 5)
             // попытался найти Vi для столбца Volume1, массива cargo. Выводит ошибку.
 
             //double V1i = Math.Abs((((cargo[pos2 + 1].Volume1 - cargo[pos2].Volume1))/ (cargo[pos2 + 1].Sounding- cargo[pos2].Sounding)) * (SoundingI - cargo[pos2].Sounding) + cargo[pos2].Volume1);
+
+            int pos1 = 0;
+            double DifShip = -0.35;
+            double SoundingI = 5;
+            int pos2 = 0;
+
+            Dif dif = Dif.Load(ref pos1, DifShip);
+            Cargo cargo = Cargo.Load(ref pos2, SoundingI);
 
             Console.WriteLine(cargo[pos2].V[pos1+2]);
 
